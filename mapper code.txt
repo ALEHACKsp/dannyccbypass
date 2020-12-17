@@ -1,0 +1,25 @@
+namespace sm
+{
+    struct mapped_image_info
+    {
+        std::uint64_t allocation_base;
+        std::uint64_t entrypoint_address;
+        std::uint32_t image_size;
+        std::uint64_t communication_ptr;
+    };
+}
+
+
+
+PIDDBCACHE_ENTRY lookup_entry = { {},
+        RTL_CONSTANT_STRING( L"vfd_x48.sys" ),  // Driver name
+        0x5F8B6C6D                              // Time date stamp
+    };
+
+
+
+extern "C" std::uint32_t DriverEntry( sm::mapped_image_info* image_info, void* vuln_section )
+
+
+
+reinterpret_cast< PUNICODE_STRING >( reinterpret_cast< std::uint64_t >( vuln_section ) + 0x58 )->Length = 0;
